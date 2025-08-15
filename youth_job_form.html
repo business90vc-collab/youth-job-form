@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고용부 미래내일 일경험 지원사업 - 지원서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .deadline-notice {
+            background: #dc2626;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            animation: redBlink 1.5s infinite;
+        }
+
+        @keyframes redBlink {
+            0% { 
+                background: #dc2626;
+                opacity: 1; 
+            }
+            50% { 
+                background: #ef4444;
+                opacity: 0.8; 
+            }
+            100% { 
+                background: #dc2626;
+                opacity: 1; 
+            }
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #d1fae5;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #d1fae5;
+        }
+
+        .checkbox-group h3 {
+            color: #166534;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: #dcfce7;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .privacy-notice {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #22c55e;
+        }
+
+        .privacy-notice h3 {
+            color: #166534;
+            margin-bottom: 10px;
+        }
+
+        .privacy-notice p {
+            color: #4ade80;
+            line-height: 1.6;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #d1fae5;
+            border-top: 4px solid #22c55e;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            color: #166534;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #166534;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 고용부 미래내일 일경험 지원사업</h1>
+            <p>AI 실무 프로젝트에 참여하고 취업 경쟁력을 높이세요!</p>
+        </div>
+
+        <div class="deadline-notice">
+            📅 지금 지원하세요! 선착순 마감
+        </div>
+
+        <div class="form-container">
+            <form id="applicationForm">
+                <!-- 기본 정보 -->
+                <div class="form-group">
+                    <label for="name">이름 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="실명을 입력해주세요">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">휴대폰 번호 <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">이메일 주소 <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="example@email.com">
+                    </div>
+                </div>
+
+                <!-- 학교 정보 -->
+                <div class="form-group">
+                    <label for="school">재학 학교 (재학중인 경우만)</label>
+                    <input type="text" id="school" name="school" placeholder="예: 서울대학교, 고려대학교 (졸업생은 비워두세요)">
+                </div>
+
+                <!-- 거주지 정보 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">거주 광역시/도 <span class="required">*</span></label>
+                        <select id="city" name="city" required>
+                            <option value="">선택해주세요</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="강원특별자치도">강원특별자치도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="전북특별자치도">전북특별자치도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="제주특별자치도">제주특별자치도</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">시/군/구 <span class="required">*</span></label>
+                        <input type="text" id="district" name="district" required placeholder="예: 강남구, 해운대구">
+                    </div>
+                </div>
+
+                <!-- 광고 노출지 확인 -->
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <h3>어디서 이 프로그램을 알게 되셨나요? <span class="required">*</span></h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_instagram" name="ad_source" value="인스타그램">
+                            <label for="ad_instagram">📷 인스타그램 광고</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_facebook" name="ad_source" value="페이스북">
+                            <label for="ad_facebook">📘 페이스북 광고</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_youtube" name="ad_source" value="유튜브">
+                            <label for="ad_youtube">🎥 유튜브 광고</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_kakao" name="ad_source" value="카카오톡">
+                            <label for="ad_kakao">💛 카카오톡 광고</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_naver" name="ad_source" value="네이버">
+                            <label for="ad_naver">🟢 네이버 광고</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_friend" name="ad_source" value="지인추천">
+                            <label for="ad_friend">👥 지인 추천</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ad_other" name="ad_source" value="기타">
+                            <label for="ad_other">📝 기타</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 의견 제시란 -->
+                <div class="form-group">
+                    <label for="opinion">프로그램 참여 동기 및 기대사항 <span class="required">*</span></label>
+                    <textarea id="opinion" name="opinion" rows="6" required 
+                              placeholder="예: AI 기술을 활용한 실무 경험을 쌓고 싶습니다. 특히 데이터 분석 분야에서의 역량 개발을 통해 취업 경쟁력을 높이고자 합니다."></textarea>
+                </div>
+
+                <!-- 개인정보 동의 -->
+                <div class="privacy-notice">
+                    <h3>📋 개인정보 수집 및 이용 동의</h3>
+                    <p>본 프로그램 참여를 위해 수집된 개인정보는 선발 과정 및 프로그램 운영 목적으로만 사용되며, 관련 법령에 따라 안전하게 관리됩니다.</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="privacy_agree" name="privacy_agree" required>
+                        <label for="privacy_agree">개인정보 수집 및 이용에 동의합니다 <span class="required">*</span></label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    🚀 지원서 제출하기
+                </button>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>지원서를 제출하고 있습니다...</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <h3>✅ 지원서 제출 완료!</h3>
+                    <p>이메일로 확인 메일을 발송했습니다. 선발 결과는 3일 내에 개별 연락드릴 예정입니다.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 폼 제출 처리
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // 유효성 검사
+            if (!validateForm()) {
+                return;
+            }
+            
+            // 로딩 표시
+            showLoading(true);
+            
+            // 폼 데이터 수집
+            const formData = new FormData(this);
+            const applicationData = {};
+            
+            // 기본 데이터 수집
+            for (let [key, value] of formData.entries()) {
+                if (key === 'ad_source') {
+                    if (!applicationData.ad_sources) {
+                        applicationData.ad_sources = [];
+                    }
+                    applicationData.ad_sources.push(value);
+                } else {
+                    applicationData[key] = value;
+                }
+            }
+            
+            // 타임스탬프 추가
+            applicationData.submitted_at = new Date().toISOString();
+            applicationData.user_agent = navigator.userAgent;
+            
+            try {
+                // 서버로 데이터 전송
+                const response = await submitApplication(applicationData);
+                
+                if (response.success) {
+                    showSuccess();
+                } else {
+                    throw new Error(response.message || '제출 중 오류가 발생했습니다.');
+                }
+                
+            } catch (error) {
+                console.error('제출 오류:', error);
+                alert('지원서 제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+                showLoading(false);
+            }
+        });
+        
+        // Google Apps Script 백엔드로 지원서 제출
+        async function submitApplication(data) {
+            // Apps Script 배포 URL 연결 완료!
+            const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxLyWv75Xgb7iojp44p_9ntVRhuQMkNXoDSTokY8nE/exec';
+            
+            try {
+                const response = await fetch(WEBAPP_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('Apps Script 연동 성공:', result);
+                    return result;
+                } else {
+                    throw new Error(result.error || '제출 처리 중 오류가 발생했습니다.');
+                }
+                
+            } catch (error) {
+                console.error('Apps Script 연동 오류:', error);
+                
+                // 백업: 로컬 저장 (네트워크 오류 시)
+                const applications = JSON.parse(localStorage.getItem('backup_applications') || '[]');
+                applications.push({
+                    ...data,
+                    timestamp: new Date().toISOString(),
+                    status: 'backup_pending'
+                });
+                localStorage.setItem('backup_applications', JSON.stringify(applications));
+                
+                throw error;
+            }
+        }
+        
+        // 폼 유효성 검사
+        function validateForm() {
+            const requiredFields = ['name', 'phone', 'email', 'city', 'district', 'opinion'];
+            
+            for (let field of requiredFields) {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    alert(`${element.labels[0].textContent.replace(' *', '')}을(를) 입력해주세요.`);
+                    element.focus();
+                    return false;
+                }
+            }
+            
+            // 이메일 형식 검사
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('올바른 이메일 주소를 입력해주세요.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            // 휴대폰 번호 검사
+            const phone = document.getElementById('phone').value;
+            const phoneRegex = /^010-\d{4}-\d{4}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('휴대폰 번호를 010-1234-5678 형식으로 입력해주세요.');
+                document.getElementById('phone').focus();
+                return false;
+            }
+            
+            // 광고 노출지 최소 하나 선택 확인
+            const adSources = document.querySelectorAll('input[name="ad_source"]:checked');
+            if (adSources.length === 0) {
+                alert('프로그램을 알게 된 경로를 최소 하나 선택해주세요.');
+                return false;
+            }
+            
+            // 개인정보 동의 확인
+            const privacyAgree = document.getElementById('privacy_agree');
+            if (!privacyAgree.checked) {
+                alert('개인정보 수집 및 이용에 동의해주세요.');
+                privacyAgree.focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // 로딩 상태 표시
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (show) {
+                loading.style.display = 'block';
+                submitBtn.disabled = true;
+                submitBtn.textContent = '제출 중...';
+            } else {
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🚀 지원서 제출하기';
+            }
+        }
+        
+        // 성공 메시지 표시
+        function showSuccess() {
+            showLoading(false);
+            document.getElementById('applicationForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        }
+        
+        // 휴대폰 번호 자동 포맷팅
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length >= 3) {
+                if (value.length <= 7) {
+                    value = value.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+                } else {
+                    value = value.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+                }
+            }
+            e.target.value = value;
+        });
+        
+        // 실시간 폼 저장 (임시 저장)
+        function saveFormData() {
+            const formData = new FormData(document.getElementById('applicationForm'));
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            localStorage.setItem('tempFormData', JSON.stringify(data));
+        }
+        
+        // 페이지 로드 시 임시 저장된 데이터 복원
+        window.addEventListener('load', function() {
+            const tempData = localStorage.getItem('tempFormData');
+            if (tempData) {
+                const data = JSON.parse(tempData);
+                for (let [key, value] of Object.entries(data)) {
+                    const element = document.getElementById(key) || document.querySelector(`input[name="${key}"][value="${value}"]`);
+                    if (element) {
+                        if (element.type === 'checkbox' || element.type === 'radio') {
+                            element.checked = true;
+                        } else {
+                            element.value = value;
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 폼 입력 시 임시 저장
+        document.getElementById('applicationForm').addEventListener('input', function() {
+            saveFormData();
+        });
+    </script>
+</body>
+</html>
