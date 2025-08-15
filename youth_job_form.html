@@ -451,8 +451,8 @@
         
         // Google Apps Script 백엔드로 지원서 제출
         async function submitApplication(data) {
-            // Apps Script 배포 URL 연결 완료!
-            const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxLyWv75Xgb7iojp44p_9ntVRhuQMkNXoDSTokY8nE/exec';
+            // CORS 수정된 새 배포 URL!
+            const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxTQKRMMGYBWeaf7nDcCWMMX9VxBYZHG5KBQFQtYDmcojl5dmL4eSqowooMNZHrfbLw/exec';
             
             try {
                 const response = await fetch(WEBAPP_URL, {
